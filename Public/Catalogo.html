@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AKRON - Catálogo Completo</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AKRON - Catálogo Completo</title>
+  <link rel="stylesheet" href="../src/css/styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+
     <!-- Toast Container -->
     <div id="toast-container"></div>
 
     <!-- Modal de Imagem -->
-    <div id="image-modal" class="image-modal">
+    <div id="image-modal" class="image-modal hidden">
         <div class="modal-content">
-            <div class="modal-close" onclick="closeImageModal()">&times;</div>
-            <img id="modal-image" class="modal-image" src="" alt="">
+            <div class="modal-close" onclick="closeImageModal()">
+                &times;
+            </div>
+            <img id="modal-image" class="modal-image" src="" alt="Imagem do produto em destaque">
             <div class="zoom-controls">
                 <button class="zoom-btn" onclick="zoomImage(0.8)">-</button>
                 <button class="zoom-btn" onclick="resetZoom()">Reset</button>
@@ -28,181 +31,97 @@
     <header class="bg-black text-white sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <img 
                         src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/52b2da4e-c015-4f53-b49d-01fcff86ab18.png" 
-                        alt="Logo AKRON" 
+                        alt="Logo AKRON"
                         class="h-20 hover:scale-105 transition-transform duration-300 cursor-pointer logo-glow"
                         onclick="window.location.href='index.html'"
                     >
                 </div>
-                
-                <!-- Menu desktop -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a 
-                            href="index.html"
-                            class="nav-link text-white px-3 py-2 text-sm font-bold"
-                        >
-                            INÍCIO
-                        </a>
-                        <a 
-                            href="catalogo.html"
-                            class="nav-link text-white px-3 py-2 text-sm font-bold border-b-2 border-red-600"
-                        >
-                            CATÁLOGO COMPLETO
-                        </a>
-                        <a 
-                            href="index.html#diferenciais"
-                            class="nav-link text-white px-3 py-2 text-sm font-bold"
-                        >
-                            DIFERENCIAIS
-                        </a>
-                        <a 
-                            href="index.html#tamanhos"
-                            class="nav-link text-white px-3 py-2 text-sm font-bold"
-                        >
-                            TAMANHOS
-                        </a>
-                        <a 
-                            href="index.html#contato"
-                            class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md text-sm font-bold transition"
-                        >
-                            COMPRAR AGORA
-                        </a>
+                        <a href="index.html" class="nav-link text-white px-3 py-2 text-sm font-bold">INÍCIO</a>
+                        <a href="catalogo.html" class="nav-link text-white px-3 py-2 text-sm font-bold border-b-2 border-red-600">CATÁLOGO</a>
+                        <a href="index.html#diferenciais" class="nav-link text-white px-3 py-2 text-sm font-bold">DIFERENCIAIS</a>
+                        <a href="index.html#tamanhos" class="nav-link text-white px-3 py-2 text-sm font-bold">TAMANHOS</a>
+                        <a href="index.html#contato" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md text-sm font-bold transition">COMPRAR AGORA</a>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <!-- Hero do Catálogo -->
-    <section class="py-20 bg-black text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight uppercase">
+    <!-- Hero -->
+    <section class="py-20 bg-black text-white text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 uppercase">
                 CATÁLOGO <span class="text-red-600">COMPLETO</span>
             </h1>
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-                Toda nossa coleção de camisetas oversized para academia.<br>
-                Performance e estilo em cada peça.
+                Toda nossa coleção de camisetas oversized para academia.<br>Performance e estilo em cada peça.
             </p>
         </div>
     </section>
 
     <!-- Filtros -->
     <section class="py-8 bg-white border-b-2 border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-wrap justify-center gap-4">
-                <button onclick="filterProducts('all')" class="filter-btn bg-red-600 text-white px-6 py-2 rounded-md font-bold transition hover:bg-red-700">
-                    TODOS
-                </button>
-                <button onclick="filterProducts('new')" class="filter-btn bg-gray-200 text-black px-6 py-2 rounded-md font-bold transition hover:bg-gray-300">
-                    NOVOS
-                </button>
-                <button onclick="filterProducts('limited')" class="filter-btn bg-gray-200 text-black px-6 py-2 rounded-md font-bold transition hover:bg-gray-300">
-                    EDIÇÃO LIMITADA
-                </button>
-                <button onclick="filterProducts('sale')" class="filter-btn bg-gray-200 text-black px-6 py-2 rounded-md font-bold transition hover:bg-gray-300">
-                    PROMOÇÃO
-                </button>
-            </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-4">
+            <button onclick="filterProducts('all')" class="filter-btn bg-red-600 text-white px-6 py-2 rounded-md font-bold transition hover:bg-red-700">TODOS</button>
+            <button onclick="filterProducts('new')" class="filter-btn bg-gray-200 text-black px-6 py-2 rounded-md font-bold transition hover:bg-gray-300">NOVOS</button>
+            <button onclick="filterProducts('limited')" class="filter-btn bg-gray-200 text-black px-6 py-2 rounded-md font-bold transition hover:bg-gray-300">EDIÇÃO LIMITADA</button>
+            <button onclick="filterProducts('sale')" class="filter-btn bg-gray-200 text-black px-6 py-2 rounded-md font-bold transition hover:bg-gray-300">PROMOÇÃO</button>
         </div>
     </section>
 
-    <!-- Catálogo de Produtos -->
+    <!-- Grade de Produtos -->
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="catalog-products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Produtos serão carregados aqui via JavaScript -->
+                <!-- Produtos via JS -->
             </div>
         </div>
     </section>
 
     <!-- Rodapé -->
     <footer class="bg-black text-white py-12 border-t-4 border-red-600">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <img 
-                        src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/04e2d872-3a6d-422e-a782-c968d5819936.png" 
-                        alt="Logo AKRON" 
-                        class="h-16 mb-6 hover:scale-105 transition-transform duration-300 cursor-pointer"
-                        onclick="window.location.href='index.html'"
-                    >
-                    <p class="text-gray-400">Vestuário premium para quem leva treino a sério.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-4">LINKS</h3>
-                    <ul class="space-y-2">
-                        <li>
-                            <a 
-                                href="index.html#colecao"
-                                class="text-gray-400 hover:text-white transition"
-                            >
-                                Coleção
-                            </a>
-                        </li>
-                        <li>
-                            <a 
-                                href="catalogo.html"
-                                class="text-gray-400 hover:text-white transition"
-                            >
-                                Catálogo
-                            </a>
-                        </li>
-                        <li>
-                            <a 
-                                href="index.html#diferenciais"
-                                class="text-gray-400 hover:text-white transition"
-                            >
-                                Diferenciais
-                            </a>
-                        </li>
-                        <li>
-                            <a 
-                                href="index.html#tamanhos"
-                                class="text-gray-400 hover:text-white transition"
-                            >
-                                Tamanhos
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-4">ATENDIMENTO</h3>
-                    <ul class="space-y-2">
-                        <li class="text-gray-400">Segunda a Sexta: 9h às 18h</li>
-                        <li class="text-gray-400">Sábado: 9h às 13h</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-4">NEWSLETTER</h3>
-                    <p class="text-gray-400 mb-4">Cadastre-se para receber novidades e promoções.</p>
-                    <form onsubmit="handleNewsletterSubmit(event)" class="flex">
-                        <input 
-                            type="email" 
-                            id="newsletter-email"
-                            placeholder="Seu e-mail" 
-                            required
-                            class="px-4 py-2 bg-gray-800 text-white rounded-l-md focus:outline-none w-full"
-                        >
-                        <button 
-                            type="submit"
-                            class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-r-md transition"
-                        >
-                            OK
-                        </button>
-                    </form>
-                </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/04e2d872-3a6d-422e-a782-c968d5819936.png" alt="Logo AKRON" class="h-16 mb-6 hover:scale-105 transition-transform cursor-pointer" onclick="window.location.href='index.html'">
+                <p class="text-gray-400">Vestuário premium para quem leva treino a sério.</p>
             </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">LINKS</h3>
+                <ul class="space-y-2 text-gray-400">
+                <li><a href="index.html#colecao" class="hover:text-white transition">Coleção</a></li>
+                <li><a href="catalogo.html" class="hover:text-white transition">Catálogo</a></li>
+                <li><a href="index.html#diferenciais" class="hover:text-white transition">Diferenciais</a></li>
+                <li><a href="index.html#tamanhos" class="hover:text-white transition">Tamanhos</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">ATENDIMENTO</h3>
+                <ul class="space-y-2 text-gray-400">
+                <li>Seg a Sex: 9h às 18h</li>
+                <li>Sábado: 9h às 13h</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">NEWSLETTER</h3>
+                <p class="text-gray-400 mb-4">Cadastre-se para receber novidades e promoções.</p>
+                <form onsubmit="handleNewsletterSubmit(event)" class="flex">
+                <input type="email" id="newsletter-email" placeholder="Seu e-mail" required class="px-4 py-2 bg-gray-800 text-white rounded-l-md focus:outline-none w-full">
+                <button type="submit" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-r-md transition">OK</button>
+                </form>
+            </div>
+        </div>
             <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
                 <p>© 2023 AKRON. Todos os direitos reservados.</p>
             </div>
-        </div>
     </footer>
 
-    <script src="js/main.js"></script>
-    <script src="js/products.js"></script>
+    <!-- Scripts -->
+    <script type = "module" src="../src/js/main.js" defer></script>
+    <script type = "module" src="../src/js/produtos.js" defer></script>
 </body>
 </html>

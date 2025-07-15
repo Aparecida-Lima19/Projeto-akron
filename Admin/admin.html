@@ -1,343 +1,101 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AKRON - Painel Admin</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AKRON - Painel Admin</title>
+  <link rel="stylesheet" href="../src/css/styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+
     <!-- Toast Container -->
     <div id="toast-container"></div>
 
-    <!-- Header Admin -->
+    <!-- Header -->
     <header class="bg-black text-white sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center">
-                    <img 
-                        src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/52b2da4e-c015-4f53-b49d-01fcff86ab18.png" 
-                        alt="Logo AKRON" 
-                        class="h-20 hover:scale-105 transition-transform duration-300 cursor-pointer logo-glow"
-                        onclick="window.location.href='index.html'"
-                    >
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a 
-                            href="index.html"
-                            class="text-white px-3 py-2 text-sm font-bold hover:text-red-600 transition"
-                        >
-                            INÍCIO
-                        </a>
-                        <a 
-                            href="catalogo.html"
-                            class="text-white px-3 py-2 text-sm font-bold hover:text-red-600 transition"
-                        >
-                            CATÁLOGO
-                        </a>
-                        <span class="text-white px-3 py-2 text-sm font-bold border-b-2 border-red-600">
-                            PAINEL ADMIN
-                        </span>
-                    </div>
-                </div>
+        <div class="flex justify-between items-center h-20">
+            <div class="flex items-center">
+            <img 
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/52b2da4e-c015-4f53-b49d-01fcff86ab18.png"
+                alt="Logo AKRON"
+                class="h-20 hover:scale-105 transition-transform cursor-pointer"
+                onclick="window.location.href='index.html'"
+            >
             </div>
+            <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-8">
+                <a href="index.html" class="text-sm font-bold px-3 py-2 hover:text-red-600 transition">INÍCIO</a>
+                <a href="catalogo.html" class="text-sm font-bold px-3 py-2 hover:text-red-600 transition">CATÁLOGO</a>
+                <span class="text-sm font-bold px-3 py-2 border-b-2 border-red-600">PAINEL ADMIN</span>
+            </div>
+            </div>
+        </div>
         </nav>
     </header>
 
-    <!-- Login Admin -->
+    <!-- Tela de Login -->
     <div id="admin-login" class="min-h-screen bg-black text-white flex items-center justify-center">
         <div class="bg-gray-900 p-8 rounded-lg shadow-lg max-w-md w-full">
-            <h2 class="text-3xl font-bold text-center mb-8 text-red-600">PAINEL ADMINISTRATIVO</h2>
-            <form onsubmit="adminLogin(event)">
-                <div class="mb-4">
-                    <label for="admin-password" class="block text-white font-medium mb-2">Senha de Acesso</label>
-                    <input 
-                        type="password" 
-                        id="admin-password" 
-                        required
-                        class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-red-600"
-                        placeholder="Digite a senha"
-                    />
-                </div>
-                <button 
-                    type="submit" 
-                    class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-md font-bold w-full transition"
-                >
-                    ENTRAR
-                </button>
-            </form>
+        <h2 class="text-3xl font-bold text-center mb-8 text-red-600">PAINEL ADMINISTRATIVO</h2>
+        <form onsubmit="adminLogin(event)">
+            <div class="mb-4">
+            <label for="admin-password" class="block mb-2">Senha de Acesso</label>
+            <input 
+                type="password"
+                id="admin-password"
+                required
+                placeholder="Digite a senha"
+                class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-red-600"
+            />
+            </div>
+            <button 
+            type="submit"
+            class="w-full bg-red-600 hover:bg-red-700 px-6 py-3 rounded-md font-bold transition"
+            >
+            ENTRAR
+            </button>
+        </form>
         </div>
     </div>
 
-    <!-- Admin Panel -->
+    <!-- Painel Administrativo -->
     <div id="admin-panel" class="min-h-screen bg-gray-100" style="display: none;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="text-center mb-12">
-                <h1 class="text-4xl font-black text-black mb-4">PAINEL ADMINISTRATIVO</h1>
-                <p class="text-lg text-gray-700">Gerencie o conteúdo do site e produtos</p>
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-black mb-4">PAINEL ADMINISTRATIVO</h1>
+            <p class="text-lg text-gray-700">Gerencie o conteúdo do site e os produtos</p>
+        </div>
+
+        <!-- Abas -->
+        <div class="mb-8">
+            <div class="flex flex-wrap gap-2 border-b-2 border-gray-200">
+            <button onclick="showAdminTab('home')" class="admin-tab px-6 py-3 font-bold rounded-t-lg bg-red-600 text-white" id="home-tab">PÁGINA INICIAL</button>
+            <button onclick="showAdminTab('collection')" class="admin-tab px-6 py-3 font-bold rounded-t-lg bg-gray-200 text-black hover:bg-gray-300" id="collection-tab">COLEÇÃO</button>
+            <button onclick="showAdminTab('products')" class="admin-tab px-6 py-3 font-bold rounded-t-lg bg-gray-200 text-black hover:bg-gray-300" id="products-tab">PRODUTOS</button>
             </div>
+        </div>
 
-            <!-- Abas de Navegação -->
-            <div class="mb-8">
-                <div class="flex flex-wrap gap-2 border-b-2 border-gray-200">
-                    <button 
-                        onclick="showAdminTab('home')"
-                        class="admin-tab px-6 py-3 font-bold rounded-t-lg transition bg-red-600 text-white"
-                        id="home-tab"
-                    >
-                        PÁGINA INICIAL
-                    </button>
-                    <button 
-                        onclick="showAdminTab('collection')"
-                        class="admin-tab px-6 py-3 font-bold rounded-t-lg transition bg-gray-200 text-black hover:bg-gray-300"
-                        id="collection-tab"
-                    >
-                        COLEÇÃO
-                    </button>
-                    <button 
-                        onclick="showAdminTab('products')"
-                        class="admin-tab px-6 py-3 font-bold rounded-t-lg transition bg-gray-200 text-black hover:bg-gray-300"
-                        id="products-tab"
-                    >
-                        PRODUTOS
-                    </button>
-                </div>
-            </div>
+        <!-- Conteúdo das Abas (inicialmente ocultos) -->
+        <div id="admin-home-tab" class="admin-tab-content">
+            <!-- Conteúdo dinâmico via JS -->
+        </div>
 
-            <!-- Aba Página Inicial -->
-            <div id="admin-home-tab" class="admin-tab-content">
-                <div class="bg-white rounded-lg border-2 border-black p-6">
-                    <h2 class="text-2xl font-bold text-black mb-6">EDITAR PÁGINA INICIAL</h2>
-                    
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">Título Principal</label>
-                            <input 
-                                type="text" 
-                                id="main-title"
-                                value="CAMISETAS OVERSIZED"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
+        <div id="admin-collection-tab" class="admin-tab-content" style="display: none;">
+            <!-- Conteúdo dinâmico via JS -->
+        </div>
 
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">Subtítulo</label>
-                            <textarea 
-                                id="subtitle"
-                                rows="3"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            >Conforto e estilo para dominar seus treinos na academia</textarea>
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">URL da Imagem de Fundo</label>
-                            <input 
-                                type="url" 
-                                id="hero-bg-image"
-                                value="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0a2abaa9-ec49-4d2f-8fdd-720669f5faeb.png"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">URL da Logo do Hero</label>
-                            <input 
-                                type="url" 
-                                id="hero-logo-image"
-                                value="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/04e2d872-3a6d-422e-a782-c968d5819936.png"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">WhatsApp</label>
-                            <input 
-                                type="text" 
-                                id="whatsapp-number"
-                                value="558191103194"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">E-mail</label>
-                            <input 
-                                type="email" 
-                                id="contact-email-admin"
-                                value="contato@akron.com.br"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
-                    </div>
-
-                    <button 
-                        onclick="saveHomeContent()"
-                        class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-md font-bold w-full mt-6 transition"
-                    >
-                        SALVAR ALTERAÇÕES
-                    </button>
-                </div>
-            </div>
-
-            <!-- Aba Coleção -->
-            <div id="admin-collection-tab" class="admin-tab-content" style="display: none;">
-                <div class="bg-white rounded-lg border-2 border-black p-6">
-                    <h2 class="text-2xl font-bold text-black mb-6">EDITAR COLEÇÃO PRINCIPAL</h2>
-                    
-                    <div class="mb-6">
-                        <label class="block text-gray-700 font-medium mb-2">Título da Coleção</label>
-                        <input 
-                            type="text" 
-                            id="collection-title"
-                            value="NOVA COLEÇÃO"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                        />
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-gray-700 font-medium mb-2">Subtítulo da Coleção</label>
-                        <input 
-                            type="text" 
-                            id="collection-subtitle"
-                            value="Desenvolvidas para quem exige performance e estilo"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                        />
-                    </div>
-
-                    <h3 class="text-xl font-bold text-black mb-4">PRODUTOS DA COLEÇÃO PRINCIPAL</h3>
-                    <div id="collection-products-list" class="space-y-4 mb-6">
-                        <!-- Produtos da coleção serão listados aqui -->
-                    </div>
-
-                    <button 
-                        onclick="saveCollectionContent()"
-                        class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-md font-bold w-full transition"
-                    >
-                        SALVAR ALTERAÇÕES
-                    </button>
-                </div>
-            </div>
-
-            <!-- Aba Produtos -->
-            <div id="admin-products-tab" class="admin-tab-content" style="display: none;">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Adicionar Produto -->
-                    <div class="bg-white rounded-lg border-2 border-black p-6">
-                        <h2 class="text-2xl font-bold text-black mb-6">ADICIONAR PRODUTO</h2>
-                        
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-medium mb-2">Nome do Produto</label>
-                            <input 
-                                type="text" 
-                                id="product-name"
-                                placeholder="Ex: AKRON PURPLE"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-medium mb-2">Descrição</label>
-                            <input 
-                                type="text" 
-                                id="product-description"
-                                placeholder="Ex: Camiseta Oversized 100% Algodão"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-medium mb-2">Preço</label>
-                            <input 
-                                type="text" 
-                                id="product-price"
-                                placeholder="Ex: R$ 89,90"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-medium mb-2">Preço Original (opcional)</label>
-                            <input 
-                                type="text" 
-                                id="product-original-price"
-                                placeholder="Ex: R$ 109,90"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-medium mb-2">URL da Primeira Imagem</label>
-                            <input 
-                                type="url" 
-                                id="product-image1"
-                                placeholder="https://exemplo.com/imagem1.jpg"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-medium mb-2">URL da Segunda Imagem</label>
-                            <input 
-                                type="url" 
-                                id="product-image2"
-                                placeholder="https://exemplo.com/imagem2.jpg"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-medium mb-2">Categoria</label>
-                            <select 
-                                id="product-category"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            >
-                                <option value="new">Novo</option>
-                                <option value="limited">Edição Limitada</option>
-                                <option value="sale">Promoção</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2">Cores (separadas por vírgula)</label>
-                            <input 
-                                type="text" 
-                                id="product-colors"
-                                placeholder="Ex: #7C3AED,#5B21B6,#4C1D95"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-                            />
-                        </div>
-
-                        <div class="mb-6">
-                            <label class="flex items-center">
-                                <input type="checkbox" id="show-in-collection" class="mr-2">
-                                <span class="text-gray-700 font-medium">Mostrar na Coleção Principal</span>
-                            </label>
-                        </div>
-
-                        <button 
-                            onclick="addProduct()"
-                            class="bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-md font-bold w-full transition"
-                        >
-                            ADICIONAR PRODUTO
-                        </button>
-                    </div>
-
-                    <!-- Lista de Produtos -->
-                    <div class="bg-white rounded-lg border-2 border-black p-6">
-                        <h2 class="text-2xl font-bold text-black mb-6">PRODUTOS CADASTRADOS</h2>
-                        <div id="products-list" class="space-y-4 max-h-96 overflow-y-auto">
-                            <!-- Produtos serão listados aqui via JavaScript -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="admin-products-tab" class="admin-tab-content" style="display: none;">
+            <!-- Conteúdo dinâmico via JS -->
+        </div>
         </div>
     </div>
 
-    <script src="js/main.js"></script>
-    <script src="js/admin.js"></script>
-    <script src="js/products.js"></script>
+    <!-- Scripts -->
+    <script src="./Js/admin.js"></script>
+    <script src="../src/js/main.js"></script>
+    <script src="../src/js/produtos.js"></script>
+
 </body>
 </html>
